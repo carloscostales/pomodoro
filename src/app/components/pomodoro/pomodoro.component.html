@@ -1,0 +1,83 @@
+<div class="pomodoro-container text-center">
+  <div class="pomodoro-type">
+    <div class="radio-buttons-container">
+      <div class="radio-button">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" (click)="changeTimer(25)" checked>
+        <label class="btn btn-primary rounded-pill" for="flexRadioDefault1">
+          pomodoro
+        </label>
+      </div>
+      <div class="radio-button">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" (click)="changeTimer(5)">
+        <label class="btn btn-primary rounded-pill" for="flexRadioDefault2">
+          short break
+        </label>
+      </div>
+      <div class="radio-button">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" (click)="changeTimer(10)">
+        <label class="btn btn-primary rounded-pill" for="flexRadioDefault3">
+          long break
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="time-title">{{ minutes }}:{{ seconds | number: '2.0' }}</h1>
+  <!-- Start Button -->
+  <button *ngIf="!isTimerRunning" class="btn btn-primary rounded-pill" (click)="startTimer()">Start</button>
+
+  <!-- Stop Button -->
+  <button *ngIf="isTimerRunning" class="btn btn-secondary rounded-pill" (click)="stopTimer()">Stop</button>
+
+  <!-- Reset Button -->
+  <button class="btn btn-link ms-3" (click)="resetTimerClick()"><i class="fas fa-redo fa-2xl" [class.rotating]="isRotating"></i></button>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#settingsModal">
+    <i class="fa-solid fa-gear fa-2xl"></i>
+  </button>
+</div>
+
+
+<div class="fixed-bottom m-4 text-end">
+  <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#surpriseModal">
+    <i class="fa-solid fa-question fa-xl"></i><i class="fa-solid fa-question fa-xl"></i>
+  </button>
+  <button class="btn btn-link" (click)="toggleFullscreen()"><i class="fa-solid fa-expand fa-xl"></i></button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Settings</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="notificationsActivated" (change)="toggleNotification($event)">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Notification</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Surprise Modal -->
+<div class="modal fade" id="surpriseModal" tabindex="-1" aria-labelledby="surpriseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="surpriseModalLabel">:o</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="/assets/icons/crazy-frog.ico">
+      </div>
+    </div>
+  </div>
+</div>
